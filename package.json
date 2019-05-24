@@ -4,7 +4,10 @@
   "main": "server.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/server.js --exec babel-node"
+    "build": "babel src -d dist",
+    "start": "npm run build && nodemon dist/server.js",
+    "dev": "nodemon src/server.js --exec babel-node",    
+     "serve": "node dist/server.js"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
@@ -17,13 +20,13 @@
     "koa-bodyparser": "^4.2.1",
     "koa-graphql": "^0.8.0",
     "koa-router": "^7.4.0",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "nodemon": "^1.19.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/node": "^7.4.5",
-    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "nodemon": "^1.19.0"
   }

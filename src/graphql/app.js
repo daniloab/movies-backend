@@ -9,8 +9,6 @@ import bodyParser from 'koa-bodyparser'
 
 import { schema } from './schema'
 
-
-
 const app = new Koa()
 const router = new Router();
 

@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import { createServer } from 'http'
 
 import app from './graphql/app'
