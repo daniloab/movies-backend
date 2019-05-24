@@ -47,6 +47,15 @@ http://localhost:8080/graphql
 	}
 }
 ```
+- Movies Genres
+```
+{
+    genres{
+        id
+        name
+    }
+}
+```
 
 ## Tools and Frameworks
 - GraphQL

@@ -14,6 +14,7 @@ import {
 import fetch from 'node-fetch'
 
 import MovieType from '../modules/movie/MovieType'
+import GenreType from '../modules/movie/GenreType'
 
 const { api_url, api_key } = process.env
 
@@ -55,6 +56,21 @@ export default new GraphQLObjectType({
                     let data = await response.json();
 
                     return data;
+                } catch (error) {
+                    console.log('error', error)
+                }
+            }
+        },
+        genres: {
+            type: new GraphQLList(GenreType),
+            resolve: async (root, args) => {
+                try {
+                    const url = `${api_url}/genre/movie/list?api_key=${api_key}&language=en-US`;
+
+                    let response = await fetch(url);
+                    let data = await response.json();
+
+                    return data.genres;
                 } catch (error) {
                     console.log('error', error)
                 }

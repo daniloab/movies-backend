@@ -7,7 +7,8 @@ import {
     GraphQLFloat,
     GraphQLBoolean
  } from 'graphql'
-import { globalIdField } from 'graphql-relay'
+
+ import GenreType from './GenreType'
 
 const CollectionType = new GraphQLObjectType({
     name: 'Collection',
@@ -28,21 +29,6 @@ const CollectionType = new GraphQLObjectType({
         backdrop_path: {
             type: GraphQLString,
             resolve: movie => movie.backdrop_path,
-        }
-    })
-})
-
-const GenresType = new GraphQLObjectType({
-    name: 'Genres',
-    description: 'Movie Genres',
-    fields: () => ({
-        id: {
-            type: new GraphQLNonNull(GraphQLID),
-            resolve: movie => movie.id,
-        },
-        name: {
-            type: GraphQLString,
-            resolve: movie => movie.name,
         }
     })
 })
@@ -125,7 +111,7 @@ export default new GraphQLObjectType({
             resolve: movie => movie.genre_ids,
         },
         genres: {
-            type: new GraphQLList(GenresType),
+            type: new GraphQLList(GenreType),
             resolve: movie => movie.genres,
         },
         homepage: {
@@ -181,7 +167,7 @@ export default new GraphQLObjectType({
             resolve: movie => movie.runtime,
         },
         spoken_languages: {
-            type: new GraphQLList(ProductionCountriesType),
+            type: new GraphQLList(SpokenLanguagesType),
             resolve: movie => movie.spoken_languages,
         },        
         status: {
