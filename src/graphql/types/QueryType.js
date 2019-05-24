@@ -13,7 +13,7 @@ import {
 
 import fetch from 'node-fetch'
 
-import MovieType from '../modules/MovieType'
+import MovieType from '../modules/movie/MovieType'
 
 const { api_url, api_key } = process.env
 
@@ -54,9 +54,9 @@ export default new GraphQLObjectType({
                     let response = await fetch(url);
                     let data = await response.json();
 
-                    return data.results;
+                    return data;
                 } catch (error) {
-                    
+                    console.log('error', error)
                 }
             }
         }
