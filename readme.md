@@ -23,37 +23,37 @@ http://localhost:8080/graphql
 ## Queries
 - Movies Upcoming
 ```
-{ 
-	moviesUpcoming(search: "", page: 1){
-		title, 
-		overview,
-		release_date
-	    poster_path
-	    backdrop_path
-	    genre_ids
-	}
+{
+  moviesUpcoming(search:"", page:1){
+    title, 
+	overview,
+	release_date
+    poster_path
+    backdrop_path
+    genre_ids
+  }
 }
 ```
 - Movie Details
 ```
 {
-	movie(movie_id: id){
-		title
-	    backdrop_path
-	    poster_path
-	    genres {
-	      name
-	    }   		
-	}
+  movie(movie_id:123){
+    title
+    backdrop_path
+    poster_path
+    genres {
+      name
+    }
+  }
 }
 ```
 - Movies Genres
 ```
 {
-    genres{
-        id
-        name
-    }
+  genres{
+    id
+    name
+  }
 }
 ```
 
