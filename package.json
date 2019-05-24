@@ -7,7 +7,10 @@
     "start": "nodemon src/server.js --exec babel-node"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.4.4",
     "@koa/cors": "^3.0.0",
+    "babel-core": "7.0.0-bridge.0",
+    "dotenv": "^8.0.0",
     "graphql": "^14.3.1",
     "graphql-relay": "^0.6.0",
     "koa": "^2.7.0",
@@ -20,6 +23,7 @@
     "@babel/core": "^7.4.5",
     "@babel/node": "^7.4.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
-    "@babel/preset-env": "^7.4.5"
+    "@babel/preset-env": "^7.4.5",
+    "nodemon": "^1.19.0"
   }
 }

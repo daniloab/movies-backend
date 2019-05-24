@@ -6,7 +6,8 @@ import cors from '@koa/cors'
 import bodyParser from 'koa-bodyparser'
 
 import { schema } from './schema'
-import * as loaders from './loader'
+
+import dotenv from 'dotenv'
 
 const app = new Koa()
 const router = new Router();
