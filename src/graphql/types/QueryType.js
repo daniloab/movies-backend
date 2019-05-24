@@ -15,6 +15,7 @@ import fetch from 'node-fetch'
 
 import MovieType from '../modules/movie/MovieType'
 import GenreType from '../modules/movie/GenreType'
+import SearchType from '../modules/movie/SearchType'
 
 const { api_url, api_key } = process.env
 
@@ -25,7 +26,6 @@ export default new GraphQLObjectType({
         moviesUpcoming: {
             type: new GraphQLList(MovieType),
             args: {
-                search: { type: GraphQLString },
                 page: { type: GraphQLFloat }
             },
             resolve: async (root, args) => {
@@ -71,6 +71,26 @@ export default new GraphQLObjectType({
                     let data = await response.json();
 
                     return data.genres;
+                } catch (error) {
+                    console.log('error', error)
+                }
+            }
+        },
+        moviesSearch: {
+            type: SearchType,
+            args: {
+                query: { type: new GraphQLNonNull(GraphQLString) },
+                page: { type: new GraphQLNonNull(GraphQLFloat) }
+            },
+            resolve: async (root, args) => {
+                try {
+                    const {query, page} = args;
+                    const url = `${api_url}/search/movie?api_key=${api_key}&query=${query}&page=${page}&language=en-US`;
+
+                    let response = await fetch(url);
+                    let data = await response.json();
+
+                    return data;
                 } catch (error) {
                     console.log('error', error)
                 }

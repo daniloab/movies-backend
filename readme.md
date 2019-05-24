@@ -24,7 +24,7 @@ http://localhost:8080/graphql
 - Movies Upcoming
 ```
 {
-  moviesUpcoming(search:"", page:1){
+  moviesUpcoming(page:1){
     title, 
 	overview,
 	release_date

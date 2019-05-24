@@ -7,7 +7,9 @@ exports["default"] = void 0;
 
 var _graphql = require("graphql");
 
-var _graphqlRelay = require("graphql-relay");
+var _GenreType = _interopRequireDefault(require("./GenreType"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var CollectionType = new _graphql.GraphQLObjectType({
   name: 'Collection',
@@ -36,26 +38,6 @@ var CollectionType = new _graphql.GraphQLObjectType({
         type: _graphql.GraphQLString,
         resolve: function resolve(movie) {
           return movie.backdrop_path;
-        }
-      }
-    };
-  }
-});
-var GenresType = new _graphql.GraphQLObjectType({
-  name: 'Genres',
-  description: 'Movie Genres',
-  fields: function fields() {
-    return {
-      id: {
-        type: new _graphql.GraphQLNonNull(_graphql.GraphQLID),
-        resolve: function resolve(movie) {
-          return movie.id;
-        }
-      },
-      name: {
-        type: _graphql.GraphQLString,
-        resolve: function resolve(movie) {
-          return movie.name;
         }
       }
     };
@@ -170,7 +152,7 @@ var _default = new _graphql.GraphQLObjectType({
         }
       },
       genres: {
-        type: new _graphql.GraphQLList(GenresType),
+        type: new _graphql.GraphQLList(_GenreType["default"]),
         resolve: function resolve(movie) {
           return movie.genres;
         }
@@ -254,7 +236,7 @@ var _default = new _graphql.GraphQLObjectType({
         }
       },
       spoken_languages: {
-        type: new _graphql.GraphQLList(ProductionCountriesType),
+        type: new _graphql.GraphQLList(SpokenLanguagesType),
         resolve: function resolve(movie) {
           return movie.spoken_languages;
         }

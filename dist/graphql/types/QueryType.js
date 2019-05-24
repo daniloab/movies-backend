@@ -13,6 +13,10 @@ var _nodeFetch = _interopRequireDefault(require("node-fetch"));
 
 var _MovieType = _interopRequireDefault(require("../modules/movie/MovieType"));
 
+var _GenreType = _interopRequireDefault(require("../modules/movie/GenreType"));
+
+var _SearchType = _interopRequireDefault(require("../modules/movie/SearchType"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -33,9 +37,6 @@ var _default = new _graphql.GraphQLObjectType({
       moviesUpcoming: {
         type: new _graphql.GraphQLList(_MovieType["default"]),
         args: {
-          search: {
-            type: _graphql.GraphQLString
-          },
           page: {
             type: _graphql.GraphQLFloat
           }
@@ -132,6 +133,107 @@ var _default = new _graphql.GraphQLObjectType({
 
           function resolve(_x3, _x4) {
             return _resolve2.apply(this, arguments);
+          }
+
+          return resolve;
+        }()
+      },
+      genres: {
+        type: new _graphql.GraphQLList(_GenreType["default"]),
+        resolve: function () {
+          var _resolve3 = _asyncToGenerator(
+          /*#__PURE__*/
+          regeneratorRuntime.mark(function _callee3(root, args) {
+            var url, response, data;
+            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+              while (1) {
+                switch (_context3.prev = _context3.next) {
+                  case 0:
+                    _context3.prev = 0;
+                    url = "".concat(api_url, "/genre/movie/list?api_key=").concat(api_key, "&language=en-US");
+                    _context3.next = 4;
+                    return (0, _nodeFetch["default"])(url);
+
+                  case 4:
+                    response = _context3.sent;
+                    _context3.next = 7;
+                    return response.json();
+
+                  case 7:
+                    data = _context3.sent;
+                    return _context3.abrupt("return", data.genres);
+
+                  case 11:
+                    _context3.prev = 11;
+                    _context3.t0 = _context3["catch"](0);
+                    console.log('error', _context3.t0);
+
+                  case 14:
+                  case "end":
+                    return _context3.stop();
+                }
+              }
+            }, _callee3, null, [[0, 11]]);
+          }));
+
+          function resolve(_x5, _x6) {
+            return _resolve3.apply(this, arguments);
+          }
+
+          return resolve;
+        }()
+      },
+      moviesSearch: {
+        type: _SearchType["default"],
+        args: {
+          query: {
+            type: new _graphql.GraphQLNonNull(_graphql.GraphQLString)
+          },
+          page: {
+            type: new _graphql.GraphQLNonNull(_graphql.GraphQLFloat)
+          }
+        },
+        resolve: function () {
+          var _resolve4 = _asyncToGenerator(
+          /*#__PURE__*/
+          regeneratorRuntime.mark(function _callee4(root, args) {
+            var query, page, url, response, data;
+            return regeneratorRuntime.wrap(function _callee4$(_context4) {
+              while (1) {
+                switch (_context4.prev = _context4.next) {
+                  case 0:
+                    _context4.prev = 0;
+                    console.log('entrou');
+                    query = args.query, page = args.page;
+                    url = "".concat(api_url, "/search/movie?api_key=").concat(api_key, "&query=").concat(query, "&page=").concat(page, "&language=en-US");
+                    _context4.next = 6;
+                    return (0, _nodeFetch["default"])(url);
+
+                  case 6:
+                    response = _context4.sent;
+                    _context4.next = 9;
+                    return response.json();
+
+                  case 9:
+                    data = _context4.sent;
+                    console.log(data);
+                    return _context4.abrupt("return", data);
+
+                  case 14:
+                    _context4.prev = 14;
+                    _context4.t0 = _context4["catch"](0);
+                    console.log('error', _context4.t0);
+
+                  case 17:
+                  case "end":
+                    return _context4.stop();
+                }
+              }
+            }, _callee4, null, [[0, 14]]);
+          }));
+
+          function resolve(_x7, _x8) {
+            return _resolve4.apply(this, arguments);
           }
 
           return resolve;
