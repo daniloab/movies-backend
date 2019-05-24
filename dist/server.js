@@ -22,8 +22,7 @@ regeneratorRuntime.mark(function _callee() {
         case 0:
           server = (0, _http.createServer)(_app["default"].callback());
           server.listen(process.env.GRAPHQL_PORT, function () {
-            console.log("App running and listening on port ".concat(process.env.GRAPHQL_PORT, " ..."));
-            console.log("GraphQL Server is now running on http://localhost:".concat(process.env.GRAPHQL_PORT, "/graphql"));
+            console.log("App running and listening on ".concat(process.env.URL, " ..."));
           });
 
         case 2:
