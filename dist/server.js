@@ -21,7 +21,7 @@ regeneratorRuntime.mark(function _callee() {
       switch (_context.prev = _context.next) {
         case 0:
           server = (0, _http.createServer)(_app["default"].callback());
-          server.listen(process.env.GRAPHQL_PORT || 9001, function () {
+          server.listen(process.env.PORT || 8080, function () {
             console.log("App running and listening on ".concat(process.env.URL, " ..."));
           });
 
