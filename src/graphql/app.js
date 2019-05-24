@@ -1,4 +1,6 @@
-require('dotenv').config()
+import dotenv from 'dotenv'
+dotenv.config()
+
 import Koa from 'koa'
 import GraphQLHTTP from 'koa-graphql'
 import Router from 'koa-router'
@@ -7,7 +9,7 @@ import bodyParser from 'koa-bodyparser'
 
 import { schema } from './schema'
 
-import dotenv from 'dotenv'
+
 
 const app = new Koa()
 const router = new Router();

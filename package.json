@@ -16,7 +16,8 @@
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-graphql": "^0.8.0",
-    "koa-router": "^7.4.0"
+    "koa-router": "^7.4.0",
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

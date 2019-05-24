@@ -1,35 +1,21 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
 import {
     GraphQLObjectType,
     GraphQLList,
     GraphQLString,
     GraphQLInt,
-    GraphQLFloat
+    GraphQLFloat,
+    GraphQLNonNull,
+    GraphQLID
 } from 'graphql'
+
+import fetch from 'node-fetch'
 
 import MovieType from '../modules/MovieType'
 
-const movie = [
-    {
-        "vote_count": 430,
-        "id": 458156,
-        "video": false,
-        "vote_average": 7.5,
-        "title": "John Wick: Chapter 3 – Parabellum",
-        "popularity": 467.661,
-        "poster_path": "/ziEuG1essDuWuC5lpWUaw1uXY2O.jpg",
-        "original_language": "en",
-        "original_title": "John Wick: Chapter 3 – Parabellum",
-        "genre_ids": [
-            80,
-            28,
-            53
-        ],
-        "backdrop_path": "/kcga7xuiQVqM9WHfWnAbidxU7hd.jpg",
-        "adult": false,
-        "overview": "Super-assassin John Wick returns with a $14 million price tag on his head and an army of bounty-hunting killers on his trail. After killing a member of the shadowy international assassin’s guild, the High Table, John Wick is excommunicado, but the world’s most ruthless hit men and women await his every turn.",
-        "release_date": "2019-05-15"
-    }
-]
+const { api_url, api_key } = process.env
 
 export default new GraphQLObjectType({
     name: 'Query',
@@ -41,7 +27,38 @@ export default new GraphQLObjectType({
                 search: { type: GraphQLString },
                 page: { type: GraphQLFloat }
             },
-            resolve: async (root, args) => movie
+            resolve: async (root, args) => {
+                try {
+                    const { search, page } = args || {};
+                    const urlMoviesUpcoming = `${api_url}/movie/upcoming?api_key=${api_key}&language=en-US&page=${page}` ;
+
+                    let response = await fetch(urlMoviesUpcoming);
+                    let data = await response.json();
+
+                    return data.results;
+                } catch (error) {
+                    console.log(error);
+                }
+            }
         },
+        movie: {
+            type: MovieType,
+            args: {
+                movie_id: { type: new GraphQLNonNull(GraphQLID) }
+            },
+            resolve: async (root, args) => {
+                try {
+                    const { movie_id } = args || {};
+                    const url = `${api_url}/movie/${movie_id}?api_key=${api_key}&language=en-US`;
+
+                    let response = await fetch(url);
+                    let data = await response.json();
+
+                    return data.results;
+                } catch (error) {
+                    
+                }
+            }
+        }
     })
 })
