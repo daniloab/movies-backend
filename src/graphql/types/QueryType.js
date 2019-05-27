@@ -30,7 +30,7 @@ export default new GraphQLObjectType({
             },
             resolve: async (root, args) => {
                 try {
-                    const { search, page } = args || {};
+                    const { page } = args || {};
                     const urlMoviesUpcoming = `${api_url}/movie/upcoming?api_key=${api_key}&language=en-US&page=${page}` ;
 
                     let response = await fetch(urlMoviesUpcoming);
