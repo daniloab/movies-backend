@@ -22,7 +22,7 @@
     "koa-bodyparser": "^4.2.1",
     "koa-graphql": "^0.8.0",
     "koa-router": "^7.4.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "nodemon": "^1.19.0"
   },
   "devDependencies": {
